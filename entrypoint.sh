@@ -1,13 +1,13 @@
 #!/bin/sh
+set -e
 
-echo "collecting static"
+echo "Collecting static files"
 python manage.py collectstatic --noinput
 
-echo "making migrations"
-python manage.py makemigrations
+echo "Running migrations"
 python manage.py migrate
 
-echo "running server"
-python manage.py runserver
+echo "Starting Gunicorn"
+PORT=${PORT:-8000}
 
-exec "$@"
+exec gunicorn lms.wsgi:application --bind 0.0.0.0:$PORT

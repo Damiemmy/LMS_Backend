@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Install system dependencies
+# System dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
@@ -18,17 +18,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (for caching)
-COPY ./requirements.txt /app/requirements.txt
+# Install Python dependencies (cached layer)
+COPY requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip setuptools wheel \
+    && pip install -r /app/requirements.txt
 
-# Upgrade pip, setuptools, wheel
-RUN pip install --upgrade pip setuptools wheel
+# Copy entrypoint and make executable
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Install Python dependencies
-RUN pip install -r /app/requirements.txt
-
-# Copy app files
-COPY ./entrypoint.sh /app/entrypoint.sh
+# Copy project files
 COPY . .
 
 EXPOSE 8000
