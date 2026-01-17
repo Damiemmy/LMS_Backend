@@ -23,8 +23,6 @@ RUN pip install --upgrade pip setuptools wheel \
 
 COPY ./entrypoint.sh /app/entrypoint.sh
 COPY ./staticfiles /app/static
-COPY .
-
 COPY . .
 
 EXPOSE 8000
