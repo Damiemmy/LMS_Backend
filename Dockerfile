@@ -21,7 +21,9 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip setuptools wheel \
     && pip install -r /app/requirements.txt
 
-COPY entrypoint.sh /app/entrypoint.sh
+COPY ./entrypoint.sh /app/entrypoint.sh
+COPY ./staticfiles /app/static
+COPY .
 
 COPY . .
 
