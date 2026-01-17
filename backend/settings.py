@@ -162,7 +162,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'userauths.User'
 
-STATICFILES_STORAGE =  "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
   
 
 # MAILGUN_API_KEY = env("MAILGUN_API_KEY")
