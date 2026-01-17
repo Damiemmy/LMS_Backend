@@ -25,6 +25,8 @@ COPY ./entrypoint.sh /app/entrypoint.sh
 COPY ./staticfiles /app/static
 COPY . .
 
+RUN python manage.py collectstatic --no-input
+
 EXPOSE 8000
 
-ENTRYPOINT ["sh", "/app/entrypoint.sh"]
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]

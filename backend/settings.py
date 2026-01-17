@@ -162,8 +162,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'userauths.User'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-  
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
 
 # MAILGUN_API_KEY = env("MAILGUN_API_KEY")
 # MAILERSEND_API_TOKEN = env("MAILERSEND_API_TOKEN")
