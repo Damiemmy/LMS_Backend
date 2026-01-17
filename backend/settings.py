@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+from dotenv import load_dotenv
 from environs import Env
 env = Env()
 env.read_env()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +33,8 @@ SECRET_KEY = 'django-insecure-+c@7t#q96f*r#f-@ss1$2r5a3!xi59@8(o21u-8x%s%vmh4#tc
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
+CSRF_TRUSTED_ORIGIN="https://lmsbackend-production-88eb.up.railway.app/"
 
 
 # Application definition
@@ -98,11 +102,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
 }
 # else:
@@ -165,11 +169,11 @@ STATICFILES_STORAGE =  "whitenoise.storage.CompressedStaticFilesStorage"
 # MAILERSEND_API_TOKEN = env("MAILERSEND_API_TOKEN")
 # MAILGUN_SENDER_DOMAIN = env("MAILGUN_SENDER_DOMAIN")
 
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
-PAYPAL_CLIENT_ID = env("PAYPAL_CLIENT_ID") # PAYPAL_CLIENT_ID=9-320034750834758934758347
-PAYPAL_SECRET_ID = env("PAYPAL_CLIENT_SECRET") # PAYPAL_SECRET_ID=9-320034750834758934758347
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+PAYPAL_CLIENT_ID = os.environ.get("PAYPAL_CLIENT_ID") # PAYPAL_CLIENT_ID=9-320034750834758934758347
+PAYPAL_SECRET_ID = os.environ.get("PAYPAL_CLIENT_SECRET") # PAYPAL_SECRET_ID=9-320034750834758934758347
 
-FRONTEND_SITE_URL = env("FRONTEND_SITE_URL")
+FRONTEND_SITE_URL = os.environ.get("FRONTEND_SITE_URL")
 
 
 # ANYMAIL = {
@@ -180,10 +184,10 @@ FRONTEND_SITE_URL = env("FRONTEND_SITE_URL")
 # FROM_EMAIL = env("FROM_EMAIL")
 # EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 
-ENVIRONMENT = env.str("DJANGO_ENV", default="development")
+ENVIRONMENT = os.environ.get("DJANGO_ENV", default="development") 
 
-SENDGRID_API_KEY = env("SENDGRID_API_KEY")
-FROM_EMAIL = env("FROM_EMAIL")
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+FROM_EMAIL = os.environ.get("FROM_EMAIL")
 
 if ENVIRONMENT == "development":
     # During development: print emails in terminal
