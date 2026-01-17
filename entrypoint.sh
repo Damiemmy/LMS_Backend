@@ -10,4 +10,4 @@ python manage.py migrate
 echo "Starting Gunicorn"
 PORT=${PORT:-8000}
 
-exec gunicorn lms.wsgi:application --bind 0.0.0.0:$PORT
+exec gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
