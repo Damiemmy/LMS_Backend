@@ -300,7 +300,11 @@ SIMPLE_JWT = {
 }
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://codemantschool.netlify.app/",
+]
 
 CELERY_BROKER_URL=("CELERY_BROKER","redis://redis:6379/0")
 CELERY_RESULT_BACKEND=("CELERY_BACKEND","redis://redis:6379/0")
