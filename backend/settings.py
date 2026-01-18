@@ -32,10 +32,9 @@ SECRET_KEY = 'django-insecure-+c@7t#q96f*r#f-@ss1$2r5a3!xi59@8(o21u-8x%s%vmh4#tc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://lmsbackend-production-88eb.up.railway.app","http://127.0.0.1:8000"]
 
-CSRF_TRUSTED_ORIGIN="https://lmsbackend-production-88eb.up.railway.app/"
-
+CSRF_TRUSTED_ORIGINS=["https://lmsbackend-production-88eb.up.railway.app"]
 
 # Application definition
 
@@ -303,8 +302,9 @@ SIMPLE_JWT = {
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://codemantschool.netlify.app/",
+    "https://codemantschool.netlify.app",
 ]
+
 
 CELERY_BROKER_URL=("CELERY_BROKER","redis://redis:6379/0")
 CELERY_RESULT_BACKEND=("CELERY_BACKEND","redis://redis:6379/0")
